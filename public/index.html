@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>❄️ Snowball Duel - 1v1 Battle</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Snowflakes background -->
+    <div class="snowflakes" aria-hidden="true">
+      <div class="snowflake">❄</div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❄</div>
+    </div>
+
+    <div class="container">
+      <header>
+        <h1>❄️ Snowball Duel ❄️</h1>
+        <p class="subtitle">1v1 Christmas Artillery Battle</p>
+      </header>
+
+      <!-- Login/Register Screen -->
+      <div id="authScreen" class="screen active">
+        <div class="auth-container">
+          <div class="auth-tabs">
+            <button class="tab-btn active" data-tab="login">Login</button>
+            <button class="tab-btn" data-tab="register">Register</button>
+          </div>
+
+          <form id="loginForm" class="auth-form active">
+            <div class="input-group">
+              <label for="loginUsername">Username</label>
+              <input
+                type="text"
+                id="loginUsername"
+                placeholder="Enter username"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="loginPassword">Password</label>
+              <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <span>🎮</span> Login
+            </button>
+            <p id="loginError" class="error-message"></p>
+          </form>
+
+          <form id="registerForm" class="auth-form">
+            <div class="input-group">
+              <label for="registerUsername">Username</label>
+              <input
+                type="text"
+                id="registerUsername"
+                placeholder="Choose username (3-15 chars)"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="registerPassword">Password</label>
+              <input
+                type="password"
+                id="registerPassword"
+                placeholder="Choose password (min 4 chars)"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <label for="registerConfirm">Confirm Password</label>
+              <input
+                type="password"
+                id="registerConfirm"
+                placeholder="Confirm password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <span>✨</span> Register
+            </button>
+            <p id="registerError" class="error-message"></p>
+            <p id="registerSuccess" class="success-message"></p>
+          </form>
+        </div>
+      </div>
+
+      <!-- Lobby Screen -->
+      <div id="lobbyScreen" class="screen">
+        <div class="lobby-container">
+          <div class="user-info">
+            <div class="avatar">🎅</div>
+            <div class="user-details">
+              <h2 id="welcomeUser">Welcome, Player!</h2>
+              <div class="stats">
+                <div class="stat">
+                  <span class="stat-value" id="statWins">0</span>
+                  <span class="stat-label">Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value" id="statLosses">0</span>
+                  <span class="stat-label">Losses</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value" id="statGames">0</span>
+                  <span class="stat-label">Games</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lobby-actions">
+            <button id="findGameBtn" class="btn btn-large btn-primary">
+              <span>⚔️</span> Find Match
+            </button>
+            <button
+              id="cancelSearchBtn"
+              class="btn btn-large btn-secondary"
+              style="display: none"
+            >
+              <span>✖</span> Cancel Search
+            </button>
+            <p id="searchStatus" class="search-status"></p>
+          </div>
+
+          <button id="logoutBtn" class="btn btn-link">Logout</button>
+        </div>
+      </div>
+
+      <!-- Game Screen -->
+      <div id="gameScreen" class="screen">
+        <div class="game-header">
+          <div class="player-info player1-info">
+            <span class="player-name" id="player1Name">Player 1</span>
+            <span class="player-score" id="player1Score">0</span>
+          </div>
+          <div class="game-status">
+            <span id="roundInfo">Round 1</span>
+            <span id="turnIndicator" class="turn-indicator">Your Turn!</span>
+          </div>
+          <div class="player-info player2-info">
+            <span class="player-score" id="player2Score">0</span>
+            <span class="player-name" id="player2Name">Player 2</span>
+          </div>
+        </div>
+
+        <div class="game-canvas-container">
+          <canvas id="gameCanvas" width="800" height="400"></canvas>
+          <div id="gameMessage" class="game-message"></div>
+        </div>
+
+        <div class="game-controls" id="gameControls">
+          <div class="control-group">
+            <label for="angleInput">Angle (0° - 90°)</label>
+            <div class="input-with-value">
+              <input type="range" id="angleInput" min="0" max="90" value="45" />
+              <span id="angleValue">45°</span>
+            </div>
+          </div>
+          <div class="control-group">
+            <label for="forceInput">Force (10 - 100)</label>
+            <div class="input-with-value">
+              <input
+                type="range"
+                id="forceInput"
+                min="10"
+                max="100"
+                value="50"
+              />
+              <span id="forceValue">50</span>
+            </div>
+          </div>
+          <button id="shootBtn" class="btn btn-large btn-shoot">
+            <span>🎯</span> Throw Snowball!
+          </button>
+        </div>
+      </div>
+
+      <!-- Result Modal -->
+      <div id="resultModal" class="modal">
+        <div class="modal-content">
+          <h2 id="resultTitle">Game Over!</h2>
+          <p id="resultMessage"></p>
+          <div class="result-scores">
+            <span id="finalScore1">0</span>
+            <span class="vs">-</span>
+            <span id="finalScore2">0</span>
+          </div>
+          <button id="playAgainBtn" class="btn btn-primary">
+            <span>🔄</span> Play Again
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="client.js"></script>
+  </body>
+</html>
