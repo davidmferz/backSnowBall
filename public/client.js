@@ -4,9 +4,14 @@
  */
 
 // ============ Configuration ============
-const WS_URL = `ws://${window.location.hostname}:${
-  window.location.port || 3000
-}`;
+// Auto-detect WebSocket URL based on current location
+const WS_PROTOCOL = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+const WS_HOST = window.location.hostname;
+const WS_PORT = window.location.port ? `:${window.location.port}` : '';
+// Use /snowball-ws/ path for WebSocket when behind proxy
+const WS_PATH = window.location.port ? '' : '/snowball-ws';
+const WS_URL = `${WS_PROTOCOL}//${WS_HOST}${WS_PORT}${WS_PATH}`;
+
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 400;
 const PLAYER_RADIUS = 25;
