@@ -9,7 +9,7 @@ const path = require("path");
 const WebSocket = require("ws");
 
 // ============ Configuration ============
-const PORT = 3000;
+const PORT = process.env.PORT || 3001; // Use 3001 to avoid conflicts
 const GRAVITY = 9.8; // Standard gravity
 const TIME_STEP = 0.016; // ~60fps for smooth animation
 const CANVAS_WIDTH = 800;
